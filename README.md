@@ -1,29 +1,20 @@
 # Online Order Storybook UIUX
 
-通用線上訂餐系統的 Storybook UIUX 原始碼。
+這個 repository 保存通用線上訂餐系統的 Storybook UIUX 原始碼。
 
-## 內容
+目前完整可維護原始碼收錄於：
 
-- 顧客手機點餐、結帳與完成頁
-- 櫃檯點餐介面
-- 後台登入、儀表板、訂單、商品與報表頁
-- Neutral Daylight 設計系統
-- Storybook viewport：手機 430、平板 1440
+- `online-order-storybook-uiux-source.zip`
+
+壓縮檔已排除 `node_modules`、`dist`、`storybook-static`、設計歷史封存與字型／大型圖片資產，保留 React、Storybook、CSS、TypeScript、設定與 lockfile。
 
 ## 執行
 
 ```bash
+unzip online-order-storybook-uiux-source.zip
+cd storybook-code
 pnpm install
 pnpm storybook
 ```
 
-Storybook 預設網址：<http://localhost:6006/>
-
-## 建置
-
-```bash
-pnpm typecheck
-pnpm build-storybook
-```
-
-`node_modules`、`dist`、`storybook-static` 與歷史設計封存不提交至 repository。
+商品圖片可沿用目前 Storybook 部署站的 `preview-products` 資產，或重新放入 `public/preview-products/`。
