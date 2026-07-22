@@ -1,100 +1,251 @@
-/* Product detail layout: mobile-first takeaway ordering flow.
-   Keep the existing visual language and colors; only rebalance structure and spacing. */
+/* Mobile-first product detail structure based on the approved takeaway reference.
+   Keep the existing project colors; only change proportion, hierarchy and placement. */
+
+.lp-product-detail__sheet {
+  max-width: 560px;
+}
+
+.lp-product-detail__sheet > main {
+  overflow-x: hidden;
+  background: #fffdfaf2;
+}
+
 .lp-product-detail__intro {
-  display: grid !important;
-  grid-template-columns: minmax(0, 46%) minmax(0, 54%) !important;
-  align-items: stretch;
+  display: block !important;
+  width: 100%;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .lp-product-detail__intro > img {
   display: block;
   width: 100%;
-  height: 100% !important;
-  min-height: 0;
-  aspect-ratio: 4 / 3;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  aspect-ratio: 4 / 3 !important;
   object-fit: cover;
   object-position: center;
 }
 
 .lp-product-detail__copy {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  justify-content: center;
-  padding: 22px 22px 24px !important;
+  display: block !important;
+  position: relative;
+  z-index: 2;
+  margin: -22px 0 0 !important;
+  border-radius: 24px 24px 0 0;
+  padding: 28px 20px 22px !important;
+  background: linear-gradient(180deg, #fff 0%, #fffdfaf5 100%);
+  box-shadow: 0 -10px 26px #3d424712;
 }
 
 .lp-product-detail__copy > small {
+  display: block;
+  margin-bottom: 9px;
   font-size: 12px !important;
-  line-height: 1.45;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: .06em;
 }
 
 .lp-product-detail__copy > h1 {
-  margin: 7px 0 8px;
-  font-size: 25px !important;
-  line-height: 1.25 !important;
+  margin: 0 0 9px !important;
+  font-size: clamp(27px, 7vw, 31px) !important;
+  font-weight: 650 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -.025em;
 }
 
 .lp-product-detail__copy > p {
   margin: 0;
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+}
+
+.lp-product-detail__copy > div {
+  margin-top: 16px !important;
+}
+
+.lp-product-detail__copy > div > strong {
+  font-size: 22px !important;
 }
 
 .lp-product-detail__copy > div > span {
-  font-size: 13px !important;
+  font-size: 11px !important;
 }
 
-/* Mobile: large, legible 4:3 image on top; concise information below. */
+.lp-product-options {
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 2px 20px 22px !important;
+  background: #fffdfaf5 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.lp-product-options fieldset {
+  margin: 18px 0 0 !important;
+  border: 0;
+  padding: 0;
+}
+
+.lp-product-options fieldset:first-child {
+  margin-top: 0 !important;
+}
+
+.lp-product-options legend {
+  display: flex;
+  width: 100%;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 11px !important;
+  font-size: 15px !important;
+  font-weight: 700;
+}
+
+.lp-product-options legend span {
+  font-size: 11px !important;
+  font-weight: 500;
+}
+
+.lp-product-options fieldset > div {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(76px, 1fr)) !important;
+  gap: 9px !important;
+  margin-top: 0 !important;
+}
+
+.lp-product-options fieldset button {
+  min-height: 48px !important;
+  justify-content: center !important;
+  border-radius: 12px !important;
+  padding: 0 10px !important;
+  font-size: 13px !important;
+  text-align: center;
+}
+
+.lp-product-options fieldset button > span {
+  display: block !important;
+  text-align: center !important;
+}
+
+.lp-product-options fieldset button svg {
+  margin-left: 6px;
+}
+
+.lp-product-note {
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 2px 20px 24px !important;
+  background: #fffdfaf5 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.lp-product-note label {
+  gap: 9px !important;
+}
+
+.lp-product-note label > span {
+  font-size: 14px !important;
+  font-weight: 700;
+}
+
+.lp-product-note textarea {
+  width: 100%;
+  height: 50px;
+  min-height: 50px !important;
+  border-radius: 12px !important;
+  padding: 14px 13px !important;
+  font-size: 12px !important;
+  resize: none !important;
+}
+
+.lp-product-note > div {
+  margin-top: 14px !important;
+}
+
+.lp-product-detail__sheet > footer .lp-primary {
+  min-height: 56px !important;
+  border-radius: 18px !important;
+  font-size: 16px;
+}
+
 @media (max-width: 760px) {
-  .lp-product-detail__intro {
-    display: block !important;
-  }
-
-  .lp-product-detail__intro > img {
+  .lp-product-detail__sheet {
     width: 100%;
-    height: auto !important;
-    aspect-ratio: 4 / 3 !important;
-    object-fit: cover;
-    object-position: center;
+    height: calc(100dvh - 10px) !important;
+    max-height: none !important;
   }
 
-  .lp-product-detail__copy {
-    display: block;
-    padding: 17px 18px 18px !important;
+  .lp-product-detail__sheet > header {
+    position: absolute !important;
+    z-index: 6;
+    top: 0;
+    right: 0;
+    left: 0;
+    min-height: 58px !important;
+    border-bottom: 0 !important;
+    padding: 12px 14px 0 !important;
+    background: transparent !important;
+    pointer-events: none;
   }
 
-  .lp-product-detail__copy > small {
-    font-size: 11px !important;
+  .lp-product-detail__sheet > header button {
+    pointer-events: auto;
+    border-color: #ffffffd9 !important;
+    background: #ffffffe0 !important;
+    box-shadow: 0 4px 16px #2929291a;
+    backdrop-filter: blur(16px);
   }
 
-  .lp-product-detail__copy > h1 {
-    margin: 7px 0 7px;
-    font-size: 23px !important;
-    line-height: 1.28 !important;
+  .lp-product-detail__sheet > header strong {
+    visibility: hidden;
   }
 
-  .lp-product-detail__copy > p {
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.55;
+  .lp-product-detail__sheet > main {
+    padding-bottom: 8px !important;
   }
 
-  .lp-product-detail__copy > div {
-    margin-top: 12px;
+  .lp-product-detail__sheet > footer {
+    flex: 0 0 auto;
+    padding: 10px 14px max(12px, env(safe-area-inset-bottom)) !important;
+    background: #fffffff2 !important;
+    box-shadow: 0 -12px 26px #32323212 !important;
+    backdrop-filter: blur(22px);
   }
 
-  .lp-product-detail__copy > div > span {
-    font-size: 12px !important;
+  .lp-product-detail__sheet > footer .lp-primary {
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  .lp-product-detail__sheet > footer .lp-primary svg {
+    display: none;
   }
 }
 
 @media (max-width: 390px) {
   .lp-product-detail__copy {
-    padding: 15px 16px 17px !important;
+    margin-top: -18px !important;
+    border-radius: 20px 20px 0 0;
+    padding: 24px 16px 18px !important;
   }
 
   .lp-product-detail__copy > h1 {
-    font-size: 22px !important;
+    font-size: 25px !important;
+  }
+
+  .lp-product-options,
+  .lp-product-note {
+    padding-right: 16px !important;
+    padding-left: 16px !important;
   }
 }
