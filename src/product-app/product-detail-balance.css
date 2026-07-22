@@ -1,115 +1,190 @@
-/* Product detail: stable mobile-first takeaway layout.
-   Structure stays in normal document flow; no content is moved with fixed coordinates. */
+/* Mobile product detail sheet: preserve the existing visual language while
+   restructuring the page for a takeaway ordering flow. */
+
+.lp-product-detail {
+  overflow: hidden;
+  background: transparent !important;
+}
+
+.lp-product-detail__backdrop {
+  background: rgba(37, 34, 30, 0.16) !important;
+  backdrop-filter: blur(5px) !important;
+}
 
 .lp-product-detail__sheet {
-  display: flex;
+  position: absolute !important;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex !important;
   width: min(560px, 100%);
-  height: min(880px, calc(100dvh - 10px));
-  max-height: calc(100dvh - 10px);
+  height: auto !important;
+  max-height: calc(100dvh - 92px) !important;
   flex-direction: column;
+  margin: auto;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 26px 26px 0 0 !important;
+  background: linear-gradient(180deg, rgba(255, 254, 252, 0.98), rgba(248, 246, 242, 0.97)) !important;
+  box-shadow: 0 -14px 38px rgba(40, 35, 29, 0.14) !important;
+  backdrop-filter: blur(24px);
 }
 
+.lp-product-detail__handle {
+  position: absolute;
+  z-index: 5;
+  top: 8px;
+  left: 50%;
+  width: 34px;
+  height: 3px;
+  border-radius: 999px;
+  background: #aaa6a0;
+  transform: translateX(-50%);
+}
+
+/* Header remains visible behind the sheet. The close action follows mobile convention. */
 .lp-product-detail__sheet > header {
+  display: grid !important;
+  min-height: 56px !important;
   flex: 0 0 auto;
+  grid-template-columns: 40px 1fr 40px !important;
+  align-items: center;
+  padding: 12px 14px 4px !important;
+  border: 0 !important;
+  background: transparent !important;
 }
 
+.lp-product-detail__sheet > header > button {
+  grid-column: 3;
+  display: grid;
+  width: 36px !important;
+  height: 36px !important;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.94) !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 4px 14px rgba(41, 41, 41, 0.08);
+}
+
+.lp-product-detail__sheet > header > button svg {
+  display: none !important;
+}
+
+.lp-product-detail__sheet > header > button::before,
+.lp-product-detail__sheet > header > button::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 1.8px;
+  border-radius: 999px;
+  background: #292929;
+}
+
+.lp-product-detail__sheet > header > button::before {
+  transform: rotate(45deg);
+}
+
+.lp-product-detail__sheet > header > button::after {
+  transform: rotate(-45deg);
+}
+
+.lp-product-detail__sheet > header > strong {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.lp-product-detail__sheet > header > span {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* Flatten the content hierarchy so the order is:
+   image → name → introduction → options → note → price/quantity. */
 .lp-product-detail__sheet > main {
+  display: grid !important;
   min-height: 0;
   flex: 1 1 auto;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "image image"
+    "title title"
+    "description description"
+    "options options"
+    "note note"
+    "price quantity";
+  align-content: start;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 0 !important;
+  background: transparent !important;
+}
+
+.lp-product-detail__intro,
+.lp-product-detail__copy,
+.lp-product-note {
+  display: contents !important;
 }
 
 .lp-product-detail__intro {
-  display: block !important;
-  width: 100%;
   margin: 0 !important;
   border: 0 !important;
-  border-radius: 0 !important;
   padding: 0 !important;
-  overflow: visible !important;
   background: transparent !important;
   box-shadow: none !important;
 }
 
+/* 4:3 is preserved. Width is reduced so the image height is visibly lower. */
 .lp-product-detail__intro > img {
+  grid-area: image;
   display: block;
-  width: 100%;
+  width: min(calc(100% - 32px), 320px) !important;
   height: auto !important;
   min-height: 0 !important;
   max-height: none !important;
+  margin: 10px auto 0;
   aspect-ratio: 4 / 3 !important;
   object-fit: cover;
   object-position: center;
-}
-
-.lp-product-detail__copy {
-  display: block !important;
-  position: relative;
-  z-index: 2;
-  margin: -18px 0 0 !important;
-  border-radius: 22px 22px 0 0;
-  padding: 26px 20px 20px !important;
-  background: #fffdfaf5;
-  box-shadow: 0 -10px 24px #3d42470f;
+  border-radius: 16px;
 }
 
 .lp-product-detail__copy > small {
-  display: block;
-  margin: 0 0 8px;
-  font-size: 11px !important;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: .06em;
+  display: none !important;
 }
 
 .lp-product-detail__copy > h1 {
-  margin: 0 0 8px !important;
-  font-size: clamp(25px, 6.7vw, 30px) !important;
+  grid-area: title;
+  margin: 18px 20px 0 !important;
+  font-size: clamp(23px, 6vw, 27px) !important;
   font-weight: 650 !important;
   line-height: 1.2 !important;
-  letter-spacing: -.025em;
+  letter-spacing: -0.02em;
 }
 
 .lp-product-detail__copy > p {
-  margin: 0;
+  grid-area: description;
+  margin: 7px 20px 0 !important;
+  color: var(--lp-muted);
   font-size: 13px !important;
   line-height: 1.6 !important;
 }
 
-.lp-product-detail__copy > div {
-  display: flex !important;
-  position: static !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  margin: 16px 0 0 !important;
-}
-
-.lp-product-detail__copy > div > strong {
-  font-size: 22px !important;
-}
-
-.lp-product-detail__copy > div > span {
-  font-size: 11px !important;
-}
-
-.lp-product-options,
-.lp-product-note {
+.lp-product-options {
+  grid-area: options;
   margin: 0 !important;
   border: 0 !important;
   border-radius: 0 !important;
-  background: #fffdfaf5 !important;
+  padding: 20px 20px 8px !important;
+  background: transparent !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
 }
 
-.lp-product-options {
-  padding: 4px 20px 20px !important;
-}
-
 .lp-product-options fieldset {
-  margin: 18px 0 0 !important;
+  margin: 16px 0 0 !important;
   border: 0;
   padding: 0;
 }
@@ -129,21 +204,21 @@
 }
 
 .lp-product-options legend span {
+  color: var(--lp-muted);
   font-size: 11px !important;
   font-weight: 500;
 }
 
 .lp-product-options fieldset > div {
   display: grid !important;
-  position: static !important;
-  grid-template-columns: repeat(auto-fit, minmax(78px, 1fr)) !important;
+  grid-template-columns: repeat(auto-fit, minmax(76px, 1fr)) !important;
   gap: 9px !important;
   margin: 0 !important;
 }
 
 .lp-product-options fieldset button {
   display: flex;
-  min-height: 46px !important;
+  min-height: 44px !important;
   align-items: center;
   justify-content: center !important;
   gap: 6px;
@@ -158,14 +233,12 @@
   text-align: center !important;
 }
 
-.lp-product-note {
-  padding: 2px 20px 24px !important;
-}
-
-.lp-product-note label {
-  display: grid;
-  gap: 9px !important;
+.lp-product-note > label {
+  grid-area: note;
+  display: grid !important;
+  gap: 8px;
   margin: 0 !important;
+  padding: 16px 20px 18px;
 }
 
 .lp-product-note label > span {
@@ -175,39 +248,68 @@
 
 .lp-product-note textarea {
   width: 100%;
-  min-height: 58px !important;
+  min-height: 64px !important;
   border-radius: 12px !important;
   padding: 13px !important;
   font-size: 12px !important;
-  resize: vertical;
+  resize: none !important;
+}
+
+/* The original price and quantity nodes are placed into one purchase row
+   without fixed positioning, so text cannot drift or overlap. */
+.lp-product-detail__copy > div {
+  grid-area: price;
+  display: flex !important;
+  min-height: 58px;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 10px 0 10px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.lp-product-detail__copy > div > strong {
+  font-size: 23px !important;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.lp-product-detail__copy > div > span {
+  display: none !important;
 }
 
 .lp-product-note > div {
+  grid-area: quantity;
   display: flex !important;
-  position: static !important;
+  min-height: 58px;
   align-items: center !important;
-  justify-content: space-between !important;
-  margin: 14px 0 0 !important;
+  justify-content: flex-end !important;
+  margin: 0 !important;
+  padding: 10px 20px 10px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.62);
 }
 
 .lp-product-note > div > span {
-  display: inline !important;
+  display: none !important;
 }
 
 .lp-product-note > p {
-  margin: 10px 0 0;
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0 20px 8px;
   color: var(--lp-danger);
   font-size: 12px;
 }
 
 .lp-product-detail__sheet > footer {
-  display: block;
+  position: static !important;
   flex: 0 0 auto;
-  padding: 12px 14px max(14px, env(safe-area-inset-bottom)) !important;
-  border-top: 1px solid #ffffffcf;
-  background: #fffffff2;
-  box-shadow: 0 -10px 24px #32323210;
-  backdrop-filter: blur(22px);
+  padding: 10px 16px max(16px, env(safe-area-inset-bottom)) !important;
+  border-top: 0 !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(20px);
 }
 
 .lp-product-detail__sheet > footer .lp-primary {
@@ -215,69 +317,46 @@
   min-height: 54px !important;
   margin: 0 !important;
   border-radius: 18px !important;
-  font-size: 16px !important;
+  font-size: 0 !important;
 }
 
 .lp-product-detail__sheet > footer .lp-primary::before {
-  content: none !important;
+  content: "加入購物車";
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .lp-product-detail__sheet > footer .lp-primary span,
 .lp-product-detail__sheet > footer .lp-primary svg {
-  display: inline-flex !important;
+  display: none !important;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 430px) {
   .lp-product-detail__sheet {
-    height: calc(100dvh - 10px);
-    max-height: none;
+    max-height: calc(100dvh - 80px) !important;
   }
 
-  .lp-product-detail__sheet > header {
-    position: absolute !important;
-    z-index: 6;
-    top: 0;
-    right: 0;
-    left: 0;
-    min-height: 58px !important;
-    border-bottom: 0 !important;
-    padding: 12px 14px 0 !important;
-    background: transparent !important;
-    pointer-events: none;
+  .lp-product-detail__intro > img {
+    width: min(calc(100% - 28px), 304px) !important;
   }
 
-  .lp-product-detail__sheet > header button {
-    pointer-events: auto;
-    border-color: #ffffffd9 !important;
-    background: #ffffffe0 !important;
-    box-shadow: 0 4px 16px #2929291a;
-    backdrop-filter: blur(16px);
-  }
-
-  .lp-product-detail__sheet > header strong {
-    visibility: hidden;
-  }
-}
-
-@media (max-width: 390px) {
-  .lp-product-detail__copy {
-    margin-top: -16px !important;
-    border-radius: 20px 20px 0 0;
-    padding: 23px 16px 17px !important;
-  }
-
-  .lp-product-detail__copy > h1 {
-    font-size: 24px !important;
+  .lp-product-detail__copy > h1,
+  .lp-product-detail__copy > p {
+    margin-right: 16px !important;
+    margin-left: 16px !important;
   }
 
   .lp-product-options,
-  .lp-product-note {
+  .lp-product-note > label {
     padding-right: 16px !important;
     padding-left: 16px !important;
   }
 
-  .lp-product-detail__sheet > footer {
-    padding-right: 12px !important;
-    padding-left: 12px !important;
+  .lp-product-detail__copy > div {
+    padding-left: 16px;
+  }
+
+  .lp-product-note > div {
+    padding-right: 16px;
   }
 }
