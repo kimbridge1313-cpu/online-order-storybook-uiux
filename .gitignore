@@ -1,0 +1,27 @@
+# Dependencies and caches
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+storybook-static/
+
+# macOS
+.DS_Store
+
+# TypeScript generated files
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+
+# Design archives and temporary exports
+design-archive/
+design-references/
+
+# Packaged source archives
+*.zip
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*

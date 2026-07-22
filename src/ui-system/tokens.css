@@ -1,0 +1,38 @@
+:root {
+  --lam-color-canvas: #f1f2f0;
+  --lam-color-surface: 255 255 255;
+  --lam-color-ink: #242a27;
+  --lam-color-muted: #626b66;
+  --lam-color-line: #dde3de;
+  --lam-color-brand: #315d3b;
+  --lam-color-brand-strong: #284d31;
+  --lam-color-warm-light: #fff9eb;
+  --lam-color-cool-bounce: #d6e0e2;
+
+  --lam-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  --lam-font-display: Georgia, 'Times New Roman', serif;
+
+  --lam-space-1: 4px;
+  --lam-space-2: 8px;
+  --lam-space-3: 12px;
+  --lam-space-4: 16px;
+  --lam-space-5: 20px;
+  --lam-space-6: 24px;
+  --lam-space-8: 32px;
+  --lam-space-10: 40px;
+  --lam-space-12: 48px;
+
+  --lam-radius-sm: 8px;
+  --lam-radius-md: 12px;
+  --lam-radius-lg: 16px;
+  --lam-radius-xl: 20px;
+  --lam-radius-pill: 999px;
+
+  --lam-glass-opacity: 0.58;
+  --lam-glass-blur: 18px;
+  --lam-glass-border-opacity: 0.72;
+  --lam-shadow-opacity: 0.09;
+  --lam-light-warm-opacity: 0.92;
+  --lam-light-cool-opacity: 0.5;
+  --lam-light-angle: -8deg;
+}
