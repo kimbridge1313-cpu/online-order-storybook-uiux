@@ -1,13 +1,24 @@
-/* Mobile-first product detail structure based on the approved takeaway reference.
-   Keep the existing project colors; only change proportion, hierarchy and placement. */
+/* Product detail: stable mobile-first takeaway layout.
+   Structure stays in normal document flow; no content is moved with fixed coordinates. */
 
 .lp-product-detail__sheet {
-  max-width: 560px;
+  display: flex;
+  width: min(560px, 100%);
+  height: min(880px, calc(100dvh - 10px));
+  max-height: calc(100dvh - 10px);
+  flex-direction: column;
+}
+
+.lp-product-detail__sheet > header {
+  flex: 0 0 auto;
 }
 
 .lp-product-detail__sheet > main {
+  min-height: 0;
+  flex: 1 1 auto;
   overflow-x: hidden;
-  background: #fffdfaf2;
+  overflow-y: auto;
+  padding: 0 !important;
 }
 
 .lp-product-detail__intro {
@@ -37,25 +48,25 @@
   display: block !important;
   position: relative;
   z-index: 2;
-  margin: -22px 0 0 !important;
-  border-radius: 24px 24px 0 0;
-  padding: 28px 20px 22px !important;
-  background: linear-gradient(180deg, #fff 0%, #fffdfaf5 100%);
-  box-shadow: 0 -10px 26px #3d424712;
+  margin: -18px 0 0 !important;
+  border-radius: 22px 22px 0 0;
+  padding: 26px 20px 20px !important;
+  background: #fffdfaf5;
+  box-shadow: 0 -10px 24px #3d42470f;
 }
 
 .lp-product-detail__copy > small {
   display: block;
-  margin-bottom: 9px;
-  font-size: 12px !important;
+  margin: 0 0 8px;
+  font-size: 11px !important;
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: .06em;
 }
 
 .lp-product-detail__copy > h1 {
-  margin: 0 0 9px !important;
-  font-size: clamp(27px, 7vw, 31px) !important;
+  margin: 0 0 8px !important;
+  font-size: clamp(25px, 6.7vw, 30px) !important;
   font-weight: 650 !important;
   line-height: 1.2 !important;
   letter-spacing: -.025em;
@@ -63,12 +74,16 @@
 
 .lp-product-detail__copy > p {
   margin: 0;
-  font-size: 14px !important;
-  line-height: 1.65 !important;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
 }
 
 .lp-product-detail__copy > div {
-  margin-top: 16px !important;
+  display: flex !important;
+  position: static !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin: 16px 0 0 !important;
 }
 
 .lp-product-detail__copy > div > strong {
@@ -79,14 +94,18 @@
   font-size: 11px !important;
 }
 
-.lp-product-options {
+.lp-product-options,
+.lp-product-note {
   margin: 0 !important;
   border: 0 !important;
   border-radius: 0 !important;
-  padding: 2px 20px 22px !important;
   background: #fffdfaf5 !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
+}
+
+.lp-product-options {
+  padding: 4px 20px 20px !important;
 }
 
 .lp-product-options fieldset {
@@ -104,7 +123,7 @@
   width: 100%;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 11px !important;
+  margin: 0 0 10px !important;
   font-size: 15px !important;
   font-weight: 700;
 }
@@ -116,14 +135,18 @@
 
 .lp-product-options fieldset > div {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(76px, 1fr)) !important;
+  position: static !important;
+  grid-template-columns: repeat(auto-fit, minmax(78px, 1fr)) !important;
   gap: 9px !important;
-  margin-top: 0 !important;
+  margin: 0 !important;
 }
 
 .lp-product-options fieldset button {
-  min-height: 48px !important;
+  display: flex;
+  min-height: 46px !important;
+  align-items: center;
   justify-content: center !important;
+  gap: 6px;
   border-radius: 12px !important;
   padding: 0 10px !important;
   font-size: 13px !important;
@@ -135,22 +158,14 @@
   text-align: center !important;
 }
 
-.lp-product-options fieldset button svg {
-  margin-left: 6px;
-}
-
 .lp-product-note {
-  margin: 0 !important;
-  border: 0 !important;
-  border-radius: 0 !important;
   padding: 2px 20px 24px !important;
-  background: #fffdfaf5 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
 }
 
 .lp-product-note label {
+  display: grid;
   gap: 9px !important;
+  margin: 0 !important;
 }
 
 .lp-product-note label > span {
@@ -160,29 +175,62 @@
 
 .lp-product-note textarea {
   width: 100%;
-  height: 50px;
-  min-height: 50px !important;
+  min-height: 58px !important;
   border-radius: 12px !important;
-  padding: 14px 13px !important;
+  padding: 13px !important;
   font-size: 12px !important;
-  resize: none !important;
+  resize: vertical;
 }
 
 .lp-product-note > div {
-  margin-top: 14px !important;
+  display: flex !important;
+  position: static !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin: 14px 0 0 !important;
+}
+
+.lp-product-note > div > span {
+  display: inline !important;
+}
+
+.lp-product-note > p {
+  margin: 10px 0 0;
+  color: var(--lp-danger);
+  font-size: 12px;
+}
+
+.lp-product-detail__sheet > footer {
+  display: block;
+  flex: 0 0 auto;
+  padding: 12px 14px max(14px, env(safe-area-inset-bottom)) !important;
+  border-top: 1px solid #ffffffcf;
+  background: #fffffff2;
+  box-shadow: 0 -10px 24px #32323210;
+  backdrop-filter: blur(22px);
 }
 
 .lp-product-detail__sheet > footer .lp-primary {
-  min-height: 56px !important;
+  width: 100%;
+  min-height: 54px !important;
+  margin: 0 !important;
   border-radius: 18px !important;
-  font-size: 16px;
+  font-size: 16px !important;
+}
+
+.lp-product-detail__sheet > footer .lp-primary::before {
+  content: none !important;
+}
+
+.lp-product-detail__sheet > footer .lp-primary span,
+.lp-product-detail__sheet > footer .lp-primary svg {
+  display: inline-flex !important;
 }
 
 @media (max-width: 760px) {
   .lp-product-detail__sheet {
-    width: 100%;
-    height: calc(100dvh - 10px) !important;
-    max-height: none !important;
+    height: calc(100dvh - 10px);
+    max-height: none;
   }
 
   .lp-product-detail__sheet > header {
@@ -209,84 +257,17 @@
   .lp-product-detail__sheet > header strong {
     visibility: hidden;
   }
-
-  .lp-product-detail__sheet > main {
-    padding-bottom: 8px !important;
-  }
-
-  .lp-product-detail__sheet > footer {
-    flex: 0 0 auto;
-    padding: 68px 14px max(12px, env(safe-area-inset-bottom)) !important;
-    background: #fffffff2 !important;
-    box-shadow: 0 -12px 26px #32323212 !important;
-    backdrop-filter: blur(22px);
-  }
-
-  .lp-product-detail__sheet > footer .lp-primary {
-    width: 100%;
-    margin: 0 !important;
-    font-size: 0 !important;
-  }
-
-  .lp-product-detail__sheet > footer .lp-primary::before {
-    content: "加入購物車";
-    font-size: 17px;
-    font-weight: 700;
-  }
-
-  .lp-product-detail__sheet > footer .lp-primary span,
-  .lp-product-detail__sheet > footer .lp-primary svg {
-    display: none !important;
-  }
-
-  .lp-product-detail__copy > div {
-    position: fixed;
-    z-index: 125;
-    bottom: calc(max(12px, env(safe-area-inset-bottom)) + 68px);
-    left: max(30px, calc((100vw - 560px) / 2 + 20px));
-    display: grid !important;
-    gap: 4px;
-    align-items: start !important;
-    justify-items: start;
-    margin: 0 !important;
-  }
-
-  .lp-product-detail__copy > div > strong {
-    font-size: 24px !important;
-    line-height: 1.05;
-  }
-
-  .lp-product-detail__copy > div > span {
-    border: 0 !important;
-    padding: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    font-size: 11px !important;
-    font-weight: 500 !important;
-  }
-
-  .lp-product-note > div {
-    position: fixed;
-    z-index: 125;
-    right: max(30px, calc((100vw - 560px) / 2 + 20px));
-    bottom: calc(max(12px, env(safe-area-inset-bottom)) + 68px);
-    margin: 0 !important;
-  }
-
-  .lp-product-note > div > span {
-    display: none;
-  }
 }
 
 @media (max-width: 390px) {
   .lp-product-detail__copy {
-    margin-top: -18px !important;
+    margin-top: -16px !important;
     border-radius: 20px 20px 0 0;
-    padding: 24px 16px 18px !important;
+    padding: 23px 16px 17px !important;
   }
 
   .lp-product-detail__copy > h1 {
-    font-size: 25px !important;
+    font-size: 24px !important;
   }
 
   .lp-product-options,
@@ -295,11 +276,8 @@
     padding-left: 16px !important;
   }
 
-  .lp-product-detail__copy > div {
-    left: 26px;
-  }
-
-  .lp-product-note > div {
-    right: 26px;
+  .lp-product-detail__sheet > footer {
+    padding-right: 12px !important;
+    padding-left: 12px !important;
   }
 }
