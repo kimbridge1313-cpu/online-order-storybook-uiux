@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import {
-  BarChart3, Check, ChevronDown, ChevronLeft, ChevronRight, ClipboardList, LayoutDashboard, LogOut,
+  BarChart3, Check, ChevronDown, ChevronRight, ClipboardList, LayoutDashboard, LogOut,
   LockKeyhole, MapPin, Menu, MessageCircle, Minus, Package, Plus, Search, Settings, ShoppingBag, Store,
   UserRound, X,
 } from 'lucide-react'
@@ -110,7 +110,68 @@ function ProductDetail({ product, quantity, onClose, onAdd }: { product: Product
     for (let index = 0; index < orderQuantity; index += 1) onAdd()
   }
 
-  return <div className="lp-product-detail" role="dialog" aria-modal="true" aria-label={`${product.name}商品資訊`}><button className="lp-product-detail__backdrop" type="button" aria-label="關閉商品資訊" onClick={onClose} /><section className="lp-product-detail__sheet"><span className="lp-product-detail__handle" /><header><button type="button" onClick={onClose} aria-label="返回商品列表"><ChevronLeft size={22} /></button><strong>商品資訊</strong><span /></header><main><section className="lp-product-detail__intro"><img src={product.image} alt={product.name} /><div className="lp-product-detail__copy"><small>{product.category}</small><h1>{product.name}</h1><p>{product.description}</p><div><strong>{money(product.price)}</strong><span>今日供應</span></div></div></section>{optionGroups.length > 0 && <section className="lp-product-options">{optionGroups.map(group => <fieldset key={group.id}><legend>{group.name}<span>{group.required ? '必選' : '選填'} · {group.type === 'single' ? '單選' : '多選'}</span></legend><div>{group.options.map(option => { const selected = (selections[group.id] || []).includes(option.id); return <button className={selected ? 'is-active' : ''} type="button" onClick={() => toggleOption(group, option.id)} key={option.id}><span>{option.name}{option.priceDelta > 0 && <small>+{money(option.priceDelta)}</small>}</span>{selected && <Check size={15} />}</button> })}</div></fieldset>)}</section>}<section className="lp-product-note"><label><span>商品備註</span><textarea value={note} onChange={event => setNote(event.target.value)} placeholder="例如：不要蔥、餐點分開裝" /></label><div><span>數量</span><Quantity value={orderQuantity} onChange={value => setOrderQuantity(Math.max(1, value))} /></div>{error && <p>{error}</p>}</section></main><footer><button className="lp-primary" type="button" onClick={submit}>加入購物車 · {money(subtotal)}{quantity > 0 && <span>（購物車已有 {quantity}）</span>}<Plus size={18} /></button></footer></section></div>
+  return (
+    <div className="lp-product-detail" role="dialog" aria-modal="true" aria-label={`${product.name}商品資訊`}>
+      <button className="lp-product-detail__backdrop" type="button" aria-label="關閉商品資訊" onClick={onClose} />
+      <section className="lp-product-detail__sheet">
+        <span className="lp-product-detail__handle" />
+        <header>
+          <span />
+          <strong>商品資訊</strong>
+          <button type="button" onClick={onClose} aria-label="關閉商品資訊"><X size={20} /></button>
+        </header>
+
+        <main>
+          <section className="lp-product-detail__intro">
+            <img src={product.image} alt={product.name} />
+            <div className="lp-product-detail__copy">
+              <h1>{product.name}</h1>
+              <p>{product.description}</p>
+            </div>
+          </section>
+
+          {optionGroups.length > 0 && (
+            <section className="lp-product-options">
+              {optionGroups.map(group => (
+                <fieldset key={group.id}>
+                  <legend>{group.name}<span>{group.required ? '必選' : '選填'} · {group.type === 'single' ? '單選' : '多選'}</span></legend>
+                  <div>
+                    {group.options.map(option => {
+                      const selected = (selections[group.id] || []).includes(option.id)
+                      return (
+                        <button className={selected ? 'is-active' : ''} type="button" onClick={() => toggleOption(group, option.id)} key={option.id}>
+                          <span>{option.name}{option.priceDelta > 0 && <small>+{money(option.priceDelta)}</small>}</span>
+                          {selected && <Check size={15} />}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </fieldset>
+              ))}
+            </section>
+          )}
+
+          <section className="lp-product-note">
+            <label>
+              <span>商品備註</span>
+              <textarea value={note} onChange={event => setNote(event.target.value)} placeholder="例如：不要蔥、餐點分開裝" />
+            </label>
+          </section>
+        </main>
+
+        <footer className="lp-product-detail__footer">
+          <div className="lp-product-detail__footer-row">
+            <strong className="lp-product-detail__price">{money(subtotal)}</strong>
+            <Quantity value={orderQuantity} onChange={value => setOrderQuantity(Math.max(1, value))} />
+          </div>
+          {error && <p className="lp-product-detail__error">{error}</p>}
+          <button className="lp-primary" type="button" onClick={submit}>
+            加入購物車
+          </button>
+        </footer>
+      </section>
+    </div>
+  )
 }
 
 function CustomerHeader({ cartCount, onCart }: { cartCount: number; onCart: () => void }) {
