@@ -2,6 +2,7 @@ import type { Preview } from '@storybook/react-vite'
 import '../src/styles.css'
 import '../src/ui-system/tokens.css'
 import '../src/ui-system/ui-system.css'
+import '../src/product-app/product-detail-balance.css'
 
 const preview: Preview = {
   parameters: {
