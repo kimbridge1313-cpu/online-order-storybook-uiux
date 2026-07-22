@@ -13,3 +13,11 @@ main {
   margin: 96px auto;
   padding: 32px;
 }
+
+/* Keep customer-facing product thumbnails at a true 4:3 ratio on every viewport. */
+.lp-product > img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3 !important;
+  object-fit: cover;
+}
