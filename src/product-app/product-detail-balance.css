@@ -216,7 +216,7 @@
 
   .lp-product-detail__sheet > footer {
     flex: 0 0 auto;
-    padding: 10px 14px max(12px, env(safe-area-inset-bottom)) !important;
+    padding: 68px 14px max(12px, env(safe-area-inset-bottom)) !important;
     background: #fffffff2 !important;
     box-shadow: 0 -12px 26px #32323212 !important;
     backdrop-filter: blur(22px);
@@ -225,9 +225,55 @@
   .lp-product-detail__sheet > footer .lp-primary {
     width: 100%;
     margin: 0 !important;
+    font-size: 0 !important;
   }
 
+  .lp-product-detail__sheet > footer .lp-primary::before {
+    content: "加入購物車";
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .lp-product-detail__sheet > footer .lp-primary span,
   .lp-product-detail__sheet > footer .lp-primary svg {
+    display: none !important;
+  }
+
+  .lp-product-detail__copy > div {
+    position: fixed;
+    z-index: 125;
+    bottom: calc(max(12px, env(safe-area-inset-bottom)) + 68px);
+    left: max(30px, calc((100vw - 560px) / 2 + 20px));
+    display: grid !important;
+    gap: 4px;
+    align-items: start !important;
+    justify-items: start;
+    margin: 0 !important;
+  }
+
+  .lp-product-detail__copy > div > strong {
+    font-size: 24px !important;
+    line-height: 1.05;
+  }
+
+  .lp-product-detail__copy > div > span {
+    border: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+  }
+
+  .lp-product-note > div {
+    position: fixed;
+    z-index: 125;
+    right: max(30px, calc((100vw - 560px) / 2 + 20px));
+    bottom: calc(max(12px, env(safe-area-inset-bottom)) + 68px);
+    margin: 0 !important;
+  }
+
+  .lp-product-note > div > span {
     display: none;
   }
 }
@@ -247,5 +293,13 @@
   .lp-product-note {
     padding-right: 16px !important;
     padding-left: 16px !important;
+  }
+
+  .lp-product-detail__copy > div {
+    left: 26px;
+  }
+
+  .lp-product-note > div {
+    right: 26px;
   }
 }
